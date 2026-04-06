@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>이벤트 리스너 테스트</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    
+    <h2>1. 클릭 이벤트 테스트</h2>
+
+    <button id="clickBtn">클릭하세요!</button>
+
+    <hr>
+
+    <h2>2. 실시간 입력 감지</h2>
+    <input
+    type="text"
+    id="liveInput"
+    placeholder="여기에 타이핑 해보세요"
+    >
+
+    <p id="outputBox">콘솔을 확인하거나 여기에 출력됨</p>
+
+    <hr>
+
+    <h2>3. 폼 제출 (FormData)</h2>
+
+    <form id="userForm">
+
+        <p>
+            <input
+            type="text"
+            name="name"
+            placehoder="이름"
+            >
+        </p>
+
+        <p>
+            <input
+            type="email"
+            name="email"
+            placeholder="이메일"
+            >
+        </p>
+
+        <button type="submit">
+            데이터 제출
+        </button>
+
+    </form>
+
+    <script>
+        //클릭 이벤트
+        const clickBtn = document.getElementById('clickBtn')
+
+        clickBtn.addEventListener("click", function(){
+            console.log('Clicked!');
+            alert("버튼이 클릭되었습니다!");
+        });
+
+        //실시간 입력 감지
+        const liveInput = document.getElementById('liveInput');
+
+        const outputBox = document.getElementById('outputBox');
+
+        liveInput.addEventListener('input', function(){
+            const text = liveInput.value;
+
+            if(text === "") {
+                outputBox.textContent = "콘솔을 확인하거나 여기에 출력됨";
+            }
+            else {
+                outputBox.textContent = text;
+            }
+            console.log(text);
+
+        });
+
+        //FormData 제출
+        const userForm =
+        document.getElementById('userForm');
+
+        userForm.addEventListener('submit',
+            function(event){
+                event.preventDefault();
+
+                const formData =
+                new FormData(userForm);
+
+                const name =
+                formData.get('name');
+
+                const email =
+                formData.get('email');
+
+                console.log('이름:', name);
+
+                console.log('이메일:', email);
+
+                alert(
+                    "제출된 데이터\n"
+                    +
+                    "이름: "
+                    +
+                    name
+                    +
+                    "\n이메일: "
+                    +
+                    email
+                );
+            }
+        );
+    </script>
+
+</body>
+
+</html>
